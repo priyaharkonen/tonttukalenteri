@@ -39,33 +39,6 @@
     <script>
         showQuestionForDay(1); 
     </script>
-    
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            // Watch the answer container for added buttons
-            const container = document.getElementById("answer-buttons");
-        
-            const observer = new MutationObserver(() => {
-                const answerButtons = document.querySelectorAll(".answer-btn");
-                if (answerButtons.length === 0) return;
-        
-                answerButtons.forEach(btn => {
-                    btn.addEventListener("click", handleAnswer);
-                    btn.addEventListener("touchstart", handleAnswer, { passive: true });
-                });
-        
-                observer.disconnect(); // Stop once buttons are found
-            });
-        
-            observer.observe(container, { childList: true });
-        
-            function handleAnswer(e) {
-                const btn = e.target;
-                btn.classList.add("selected");
-                // your original logic runs inside showQuestionForDay()
-            }
-        });
-        </script>
 </body>
 </html>
 </html>
