@@ -331,6 +331,36 @@ body{
         transform: scale(1.10);
         box-shadow: 0 0 10px rgba(255, 210, 220, 0.5);
     }
+    /* Reveal control buttons (Avaa kaikki, Sulje kaikki, Avaa luukut tähän päivään asti) */
+    .reveal-btn {
+        width: 100%;
+        padding: 10px;
+        margin-top: 10px;
+        font-size: 15px;
+
+        background: rgba(255, 255, 255, 0.10);   /* subtle frosted white */
+        border: 2px solid rgba(255, 255, 255, 0.25);
+        color: white;
+
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.25s ease;
+        backdrop-filter: blur(3px);
+    }
+
+    /* Hover effect */
+    .reveal-btn:hover {
+        background: rgba(255, 255, 255, 0.25);
+        border-color: #ffffff;
+        transform: scale(1.05);
+        box-shadow: 0 0 12px rgba(255,255,255,0.35);
+    }
+
+    /* Optional: active click animation */
+    .reveal-btn:active {
+        transform: scale(0.97);
+        box-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
+    }
     .reveal-list {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
