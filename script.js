@@ -81,6 +81,31 @@
             revealPanel.classList.remove("open");
         });
     }
+    // Close (re-lock) selected doors
+    const closeReveal = document.getElementById("closeReveal");
+
+    if (closeReveal) {
+        closeReveal.addEventListener("click", () => {
+
+            const selected = [...document.querySelectorAll(".reveal-item.selected")]
+                .map(btn => Number(btn.dataset.day));
+
+            const dayButtons = document.querySelectorAll(".dayBox");
+
+            dayButtons.forEach(btn => {
+                const d = Number(btn.dataset.day);
+
+                if (selected.includes(d)) {
+                    btn.disabled = true;
+                    btn.classList.add("locked");
+                    btn.style.opacity = "0.5";
+                    btn.style.pointerEvents = "none";
+                }
+            });
+
+            revealPanel.classList.remove("open");
+        });
+    }
     
                 const questions = [
       
