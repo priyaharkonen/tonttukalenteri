@@ -53,19 +53,31 @@
     }
 
     // Apply reveal selections
+    // Apply reveal selections
     if (applyReveal) {
         applyReveal.addEventListener("click", () => {
-            const selected = [...document.querySelectorAll(".reveal-item.selected")]
-                .map(btn => parseInt(btn.dataset.day));
 
-            dayButtons.forEach(button => {
-                const d = parseInt(button.getAttribute("data-day"));
+            // collect selected numbers
+            const selected = [...document.querySelectorAll(".reveal-item.selected")]
+                .map(btn => Number(btn.dataset.day));
+
+            console.log("Unlocking doors:", selected); // debug
+
+            // unlock selected day buttons
+            const dayButtons = document.querySelectorAll(".dayBox");
+
+            dayButtons.forEach(btn => {
+                const d = Number(btn.dataset.day);
+
                 if (selected.includes(d)) {
-                    button.disabled = false;
-                    button.classList.remove("locked");
+                    btn.disabled = false;
+                    btn.classList.remove("locked");
+                    btn.style.opacity = "1";
+                    btn.style.pointerEvents = "auto";
                 }
             });
 
+            // close panel
             revealPanel.classList.remove("open");
         });
     }
