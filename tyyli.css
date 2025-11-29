@@ -227,53 +227,86 @@ body{
         0% { opacity: 0.2; }
         100% { opacity: 1; }
     }
-    /* ------------------------ */
-/* MULTI REVEAL (Manual unlock) */
-/* ------------------------ */
+/* Floating Reveal Button */
+.reveal-float-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #b81e3f;
+    color: white;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    cursor: pointer;
+    border: 3px solid #e4cdcc;
+    z-index: 9999;
+    transition: 0.2s;
+}
 
-.multi-reveal {
-    text-align: center;
-    margin: 20px auto;
-    background: #0f3b24;
+.reveal-float-btn:hover {
+    background-color: #d27585;
+}
+
+/* Reveal Panel */
+.reveal-panel {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    width: 260px;
+    background-color: #0b3b24;
+    padding: 20px;
     border: 3px solid #b81e3f;
-    padding: 15px 20px;
-    border-radius: 12px;
-    width: 80%;
-    max-width: 600px;
-    color: #fff;
-  }
-  
-  .reveal-list {
+    border-radius: 15px;
+    z-index: 9998;
+    color: white;
+    display: none;
+}
+
+.reveal-panel.visible {
+    display: block;
+}
+
+.reveal-list {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     gap: 8px;
-    margin: 10px 0;
-  }
-  
-  .reveal-select {
-    width: 40px;
-    height: 40px;
-    border-radius: 8px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.reveal-select {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: #b81e3f;
-    border: 2px solid #e4dcdc;
-    color: white;
+    border: 2px solid #e4cdcc;
+    border-radius: 8px;
     cursor: pointer;
     transition: 0.2s;
-  }
-  
-  .reveal-select.selected {
+}
+
+.reveal-select.selected {
     background-color: #d27585;
     border-color: white;
-  }
-  
-  #applyReveal {
-    margin-top: 10px;
-    padding: 8px 16px;
-    font-size: 16px;
+}
+
+#applyReveal {
+    width: 100%;
+    padding: 8px 0;
     background-color: #b81e3f;
-    border: 2px solid #e4dcdc;
+    border: 3px solid #e4cdcc;
     color: white;
-    border-radius: 8px;
+    border-radius: 10px;
+    font-size: 16px;
     cursor: pointer;
-  }
+}
+
+#applyReveal:hover {
+    background-color: #d27585;
+}
