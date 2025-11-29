@@ -263,7 +263,7 @@ body{
 /* Toggle button already exists — no change needed */
 
 /* PANEL CONTAINER */
-#revealPanel {
+.reveal-panel {
     position: fixed;
     top: 100px;
     right: 30px;
@@ -299,7 +299,7 @@ body{
 }
 
 /* REVEAL ITEM BUTTONS */
-.reveal-item {
+.reveal-list-item {
     width: 48px;
     height: 48px;
     font-size: 18px;
@@ -319,13 +319,13 @@ body{
 }
 
 /* Hover effect */
-.reveal-item:hover {
+.reveal-list-item:hover {
     background: rgba(255,255,255,0.15);
     transform: scale(1.05);
 }
 
 /* SELECTED STATE — GOLD GLOW */
-.reveal-item.selected {
+.reveal-list-item.selected {
     background: #d4af37;                /* gold */
     color: #2b1a00;                     /* dark brown text */
     border-color: #f7e9a8;
@@ -372,13 +372,13 @@ body{
    MOBILE RESPONSIVE
    ============================================================ */
 @media (max-width: 768px) {
-    #revealPanel {
+    .reveal-panel {
         right: 10px;
         width: 92%;
         max-width: 320px;
     }
 
-    #revealToggle {
+    .reveal-toggle-btn {
         top: auto;
         bottom: 20px;
         right: 20px;
@@ -386,11 +386,11 @@ body{
 }
 
 @media (max-width: 480px) {
-    #revealList {
+    .reveal-list {
         grid-template-columns: repeat(3, 1fr);
     }
 
-    .reveal-item {
+    .reveal-list-item {
         width: 42px;
         height: 42px;
         font-size: 16px;
