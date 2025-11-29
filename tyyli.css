@@ -281,3 +281,18 @@ body{
     background: #d27585;
     border-color: white;
 }
+#closeReveal {
+    margin-top: 10px;
+    padding: 8px 16px;
+    font-size: 16px;
+    background-color: #8b1e3f;
+    border: 2px solid #e4dcdc;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#closeReveal:hover {
+    background-color: #a42652;
+}
