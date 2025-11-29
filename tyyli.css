@@ -298,29 +298,38 @@ body{
         pointer-events: auto;
         transform: translateY(0);
     }
-    .reveal-list-item {
+    /* Panel number button (normal) */
+    .reveal-item {
         width: 48px;
         height: 48px;
-        background: #b0183f;          /* Christmas red */
-        color: white;
-        border: 2px solid #e4cdcc;     /* soft border */
-        border-radius: 8px;
         font-size: 20px;
+        background: rgba(255, 255, 255, 0.15);  /* semi-transparent white */
+        border: 2px solid #e4cdcc;              /* soft beige border */
+        color: white;
+        border-radius: 8px;
         cursor: pointer;
-        transition: 0.2s;
+        transition: 0.25s ease;
     }
 
-    /* Hover color */
-    .reveal-list-item:hover {
-        background: #d52758;          /* brighter red on hover */
-        border-color: #fff;
-    }
-
-    /* Selected look */
-    .reveal-list-item.selected {
-        background: #7d0f2f;          /* darker wine red */
+    /* Hover */
+    .reveal-item:hover {
+        background: rgba(255, 255, 255, 0.30);
         border-color: #ffffff;
-        transform: scale(1.06);
+        transform: scale(1.08);
+    }
+
+    /* Selected (clicked) */
+    .reveal-item.selected {
+        background: #d72758;                    /* Christmas red */
+        border-color: #ffffff;
+        transform: scale(1.10);
+        box-shadow: 0 0 10px rgba(255, 210, 220, 0.5);
+    }
+    .reveal-item-btn.selected {
+        background: #d72758;                    /* Christmas red */
+        border-color: #ffffff;
+        transform: scale(1.10);
+        box-shadow: 0 0 10px rgba(255, 210, 220, 0.5);
     }
     .reveal-list {
         display: grid;
@@ -329,7 +338,7 @@ body{
         margin-bottom: 12px;
     }
     
-    .reveal-list-item-btn,
+    .reveal-item-btn,
     .apply-reveal-btn,
     .close-reveal-btn,
     .open-all-btn,
