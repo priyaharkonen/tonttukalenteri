@@ -227,119 +227,162 @@ body{
         0% { opacity: 0.2; }
         100% { opacity: 1; }
     }
-
-   .reveal-panel {
-    position: fixed;
-    top: 100px;
-    right: 20px;
-    width: 260px;
-    padding: 18px;
-    border-radius: 16px;
-
-    /* Transparent glass style */
-    background: rgba(0, 0, 0, 0.35);
-    backdrop-filter: blur(8px);
-
-    border: 2px solid rgba(255, 255, 255, 0.25);
-    color: white;
-
-    opacity: 0;
-    transform: translateY(-15px);
-    pointer-events: none;
-    transition: 0.25s ease;
-    z-index: 999;
-}
-
-.reveal-panel.open {
-    opacity: 1;
-    pointer-events: auto;
-    transform: translateY(0);
-}
-.reveal-list-item {
-    width: 48px;
-    height: 48px;
-    background: #b0183f;          /* Christmas red */
-    color: white;
-    border: 2px solid #e4cdcc;     /* soft border */
-    border-radius: 8px;
-    font-size: 20px;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-/* Hover color */
-.reveal-list-item:hover {
-    background: #d52758;          /* brighter red on hover */
-    border-color: #fff;
-}
-
-/* Selected look */
-.reveal-list-item.selected {
-    background: #7d0f2f;          /* darker wine red */
-    border-color: #ffffff;
-    transform: scale(1.06);
-}
-.reveal-list {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
-    margin-bottom: 12px;
-}
-  
-.reveal-list-item-btn,
-.apply-reveal-btn,
-.close-reveal-btn,
-.open-all-btn,
-.close-all-btn,
-.open-until-today-btn,
-.reset-calendar-btn {
-    width: 100%;
-    padding: 8px;
-    background: #b0183f;
-    border: 2px solid #e4cdcc;
-    border-radius: 8px;
-    color: white;
-    cursor: pointer;
-    margin-top: 10px;
-    transition: 0.25s;
-    font-size: 14px;
-}
-
-.reveal-list-item-btn:hover,
-.apply-reveal-btn:hover,
-.close-reveal-btn:hover,
-.open-all-btn:hover,
-.close-all-btn:hover,
-.open-until-today-btn:hover,
-.reset-calendar-btn:hover {
-    background: #d72758;
-}
-
-/* ============================================================
-   MOBILE RESPONSIVE
-   ============================================================ */
-@media (max-width: 768px) {
-    .reveal-panel {
-        right: 10px;
-        width: 92%;
-        max-width: 320px;
-    }
-
     .reveal-toggle-btn {
-        top: auto;
-        bottom: 20px;
+        position: fixed;
+        top: 20px;
         right: 20px;
+        width: 58px;
+        height: 58px;
+    
+        background: #b0183f;              /* deep Christmas red */
+        border: 3px solid #e4cdcc;        /* soft border */
+        border-radius: 50%;
+    
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    
+        font-size: 30px;                   /* icon size */
+        color: #fff;
+    
+        cursor: pointer;
+        z-index: 1000;
+        transition: 0.25s ease;
+    
+        /* Subtle glow initially */
+        box-shadow: 0 0 8px rgba(255, 200, 230, 0.2);
     }
-}
+    .reveal-toggle-btn:hover {
+        transform: scale(1.15) rotate(6deg);
+        box-shadow: 0 0 10px rgba(255, 230, 250, 0.6);
+    }
+    .reveal-toggle-btn.open {
+        background: #d52758;                   /* lighter red */
+        transform: rotate(180deg);
+        box-shadow: 0 0 14px rgba(255, 200, 230, 0.7);
+    }
+    .reveal-toggle-btn span,
+    .reveal-toggle-btn {
+        animation: sparklePulse 1.8s infinite ease-in-out;
+    }
+    
+    @keyframes sparklePulse {
+        0%   { opacity: 1; transform: scale(1); }
+        50%  { opacity: 0.75; transform: scale(1.08); }
+        100% { opacity: 1; transform: scale(1); }
+    }
+   .reveal-panel {
+        position: fixed;
+        top: 100px;
+        right: 20px;
+        width: 260px;
+        padding: 18px;
+        border-radius: 16px;
 
-@media (max-width: 480px) {
-    .reveal-list {
-        grid-template-columns: repeat(3, 1fr);
+        /* Transparent glass style */
+        background: rgba(0, 0, 0, 0.35);
+        backdrop-filter: blur(8px);
+
+        border: 2px solid rgba(255, 255, 255, 0.25);
+        color: white;
+
+        opacity: 0;
+        transform: translateY(-15px);
+        pointer-events: none;
+        transition: 0.25s ease;
+        z-index: 999;
     }
 
+    .reveal-panel.open {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+    }
     .reveal-list-item {
-        width: 42px;
-        height: 42px;
-        font-size: 16px;
+        width: 48px;
+        height: 48px;
+        background: #b0183f;          /* Christmas red */
+        color: white;
+        border: 2px solid #e4cdcc;     /* soft border */
+        border-radius: 8px;
+        font-size: 20px;
+        cursor: pointer;
+        transition: 0.2s;
     }
-}
+
+    /* Hover color */
+    .reveal-list-item:hover {
+        background: #d52758;          /* brighter red on hover */
+        border-color: #fff;
+    }
+
+    /* Selected look */
+    .reveal-list-item.selected {
+        background: #7d0f2f;          /* darker wine red */
+        border-color: #ffffff;
+        transform: scale(1.06);
+    }
+    .reveal-list {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+        margin-bottom: 12px;
+    }
+    
+    .reveal-list-item-btn,
+    .apply-reveal-btn,
+    .close-reveal-btn,
+    .open-all-btn,
+    .close-all-btn,
+    .open-until-today-btn,
+    .reset-calendar-btn {
+        width: 100%;
+        padding: 8px;
+        background: #b0183f;
+        border: 2px solid #e4cdcc;
+        border-radius: 8px;
+        color: white;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: 0.25s;
+        font-size: 14px;
+    }
+
+    .reveal-list-item-btn:hover,
+    .apply-reveal-btn:hover,
+    .close-reveal-btn:hover,
+    .open-all-btn:hover,
+    .close-all-btn:hover,
+    .open-until-today-btn:hover,
+    .reset-calendar-btn:hover {
+        background: #d72758;
+    }
+
+    /* ============================================================
+    MOBILE RESPONSIVE
+    ============================================================ */
+    @media (max-width: 768px) {
+        .reveal-panel {
+            right: 10px;
+            width: 92%;
+            max-width: 320px;
+        }
+
+        .reveal-toggle-btn {
+            top: auto;
+            bottom: 20px;
+            right: 20px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .reveal-list {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .reveal-list-item {
+            width: 42px;
+            height: 42px;
+            font-size: 16px;
+        }
+    }
