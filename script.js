@@ -1,5 +1,5 @@
     // --- MODE SWITCH ---
-    // Switch to actual mode by removing "//" from line 6 and add "//" to line 9 
+    // Switch to actual mode by removing "//" from line 6 and add "//" to line 8 
     document.addEventListener("DOMContentLoaded", () => {
         const now = new Date();
         // --- ACTUAL MODE  ---
@@ -19,7 +19,41 @@
                 window.location.href = `days/day${buttonDay}.html`;  
             });
         });
-    });        
+    });  
+        /* -----------------------
+       MULTI-REVEAL FEATURE
+    ------------------------*/
+
+    const revealInputs = document.querySelectorAll(".reveal-select");
+    const applyRevealBtn = document.getElementById("applyReveal");
+
+    if (applyRevealBtn) {
+        applyRevealBtn.addEventListener("click", () => {
+            const selected = [];
+
+            revealInputs.forEach(input => {
+                if (input.classList.contains("selected")) {
+                    selected.push(parseInt(input.dataset.day));
+                }
+            });
+
+            // Unlock selected doors
+            dayButtons.forEach(button => {
+                const d = parseInt(button.getAttribute("data-day"));
+                if (selected.includes(d)) {
+                    button.disabled = false;
+                    button.classList.remove("locked");
+                }
+            });
+        });
+
+        // Selecting items
+        revealInputs.forEach(btn => {
+            btn.addEventListener("click", () => {
+                btn.classList.toggle("selected");
+            });
+        });
+    }      
     
                 const questions = [
       
