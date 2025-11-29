@@ -8,13 +8,22 @@
     <script src="https://kit.fontawesome.com/c5e42a7abd.js" crossorigin="anonymous"></script>
 </head>
 <body>
+
+    <!-- Floating Reveal Feature -->
+    <div id="revealToggle" class="reveal-float-btn">
+        ⚙️
+    </div>
+
+    <div id="revealPanel" class="reveal-panel hidden">
+        <h3>Opettajan työkalut</h3>
+        <p>Valitse luukut, jotka haluat paljastaa:</p>
+
+        <div class="reveal-list" id="revealList"></div>
+
+        <button id="applyReveal">Paljasta valitut</button>
+    </div>
       </div>
-     <div class="center-wrapper">
-        <div class="multi-reveal">
-            <p>Valitse luukut, jotka haluat paljastaa:</p>
-            <div class="reveal-list" id="revealList"></div>
-            <button id="applyReveal">Paljasta valitut</button>
-        </div>    
+     <div class="center-wrapper">   
         <h1 class="title-box">Joulukalenteri</h1>
          <div class="index-intro">
             <h2>Esittely</h2>
