@@ -227,43 +227,8 @@ body{
         0% { opacity: 0.2; }
         100% { opacity: 1; }
     }
-/* ============================================================
-   REVEAL TOGGLE BUTTON (TOP-RIGHT)
-   ============================================================ */
-   .reveal-toggle-btn {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: #b0183f;
-    border: 3px solid #e4cdcc;
-    width: 52px;
-    height: 52px;
-    color: white;
-    font-size: 28px;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-    transition: 0.25s ease;
-}
 
-.reveal-toggle-btn:hover {
-    transform: rotate(90deg) scale(1.1);
-}
-.reveal-toggle-btn .icon {
-    font-size: 24px;
-    line-height: 1;
-}
-/* =========================================
-   ✨ REVEAL PANEL — CHRISTMAS GLASS THEME
-   ========================================= */
-
-/* Toggle button already exists — no change needed */
-
-/* PANEL CONTAINER */
-.reveal-panel {
+   .reveal-panel {
     position: fixed;
     top: 100px;
     right: 20px;
@@ -284,21 +249,12 @@ body{
     transition: 0.25s ease;
     z-index: 999;
 }
-/* When panel is open */
+
 .reveal-panel.open {
     opacity: 1;
     pointer-events: auto;
     transform: translateY(0);
 }
-
-/* BUTTON GRID */
-.reveal-list {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
-    margin-bottom: 12px;
-}
-/* REVEAL ITEM BUTTONS */
 .reveal-list-item {
     width: 48px;
     height: 48px;
@@ -311,31 +267,31 @@ body{
     transition: 0.2s;
 }
 
-/* Hover effect */
+/* Hover color */
 .reveal-list-item:hover {
     background: #d52758;          /* brighter red on hover */
     border-color: #fff;
 }
 
-/* SELECTED STATE — GOLD GLOW */
+/* Selected look */
 .reveal-list-item.selected {
     background: #7d0f2f;          /* darker wine red */
     border-color: #ffffff;
     transform: scale(1.06);
 }
-.reveal-toggle-btn:hover {
-    transform: scale(1.15);
-    filter: drop-shadow(0 0 6px gold);
+.reveal-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 12px;
 }
-/* ============================================================
-   ACTION BUTTONS (Avaa kaikki, Sulje kaikki...)
-   ============================================================ */
-.reveal-list-btn,
+  
+.reveal-list-item-btn,
 .apply-reveal-btn,
 .close-reveal-btn,
 .open-all-btn,
 .close-all-btn,
-#openUntilToday,
+.open-until-today-btn,
 .reset-calendar-btn {
     width: 100%;
     padding: 8px;
@@ -349,12 +305,12 @@ body{
     font-size: 14px;
 }
 
-.reveal-list-btn:hover,
+.reveal-list-item-btn:hover,
 .apply-reveal-btn:hover,
 .close-reveal-btn:hover,
 .open-all-btn:hover,
-#closeAll:hover,
-#openUntilToday:hover,
+.close-all-btn:hover,
+.open-until-today-btn:hover,
 .reset-calendar-btn:hover {
     background: #d72758;
 }
