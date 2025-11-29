@@ -1,13 +1,10 @@
- // ===========================================
-// MODE + DOOR LOCKING
-// ===========================================
-
 document.addEventListener("DOMContentLoaded", () => {
 
+    // ================================
+    // MODE + DOOR LOCKING
+    // ================================
     const now = new Date();
     const today = (now.getMonth() === 11) ? now.getDate() : 0;
-    //Demo mode
-    //const today = 24; 
 
     const dayButtons = document.querySelectorAll(".dayBox");
 
@@ -26,115 +23,77 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // ===========================================
-    // REVEAL PANEL SETUP
-    // ===========================================
+
+    // ================================
+    // SIMPLE REVEAL SYSTEM
+    // ================================
 
     const revealToggle = document.getElementById("revealToggle");
-    const revealPanel  = document.getElementById("revealPanel");
-    const revealList   = document.getElementById("revealList");
+    const revealPanel = document.getElementById("revealPanel");
+    const revealList = document.getElementById("revealList");
 
-    const applyReveal  = document.getElementById("applyReveal");
-    const closeReveal  = document.getElementById("closeReveal");
+    const openAll = document.getElementById("openAll");
+    const closeAll = document.getElementById("closeAll");
+    const openUntilToday = document.getElementById("openUntilToday");
 
-    const openAllBtn        = document.getElementById("openAll");
-    const closeAllBtn       = document.getElementById("closeAll");
-    const openUntilTodayBtn = document.getElementById("openUntilToday");
-    const resetBtn          = document.getElementById("resetCalendar");
 
-    // Build reveal buttons
-    for (let i = 1; i <= 24; i++) {
-        const b = document.createElement("button");
-        b.textContent = i;
-        b.classList.add("reveal-item");
-        b.dataset.day = i;
+    // Build 1–24 reveal toggle buttons
+    if (revealList) {
+        for (let i = 1; i <= 24; i++) {
+            const btn = document.createElement("button");
+            btn.textContent = i;
+            btn.classList.add("reveal-item");
+            btn.dataset.day = i;
 
-        revealList.appendChild(b);
+            revealList.appendChild(btn);
 
-        b.addEventListener("click", () => {
-            b.classList.toggle("selected");
+            btn.addEventListener("click", () => {
+                const target = document.querySelector(`.dayBox[data-day="${i}"]`);
+                if (!target) return;
+                target.classList.toggle("locked");
+                target.disabled = target.classList.contains("locked");
+            });
+        }
+    }
+
+
+    // AVAA KAIKKI
+    if (openAll) {
+        openAll.addEventListener("click", () => {
+            dayButtons.forEach(btn => {
+                btn.disabled = false;
+                btn.classList.remove("locked");
+            });
         });
     }
 
-    // Toggle panel
-    revealToggle.addEventListener("click", () => {
-        revealPanel.classList.toggle("open");
-    });
-
-    // Apply reveal
-    applyReveal.addEventListener("click", () => {
-        const selected = [...document.querySelectorAll(".reveal-item.selected")]
-            .map(btn => parseInt(btn.dataset.day));
-
-        dayButtons.forEach(door => {
-            const d = parseInt(door.dataset.day);
-            if (selected.includes(d)) {
-                door.disabled = false;
-                door.classList.remove("locked");
-            }
+    // SULJE KAIKKI
+    if (closeAll) {
+        closeAll.addEventListener("click", () => {
+            dayButtons.forEach(btn => {
+                btn.disabled = true;
+                btn.classList.add("locked");
+            });
         });
+    }
 
-        revealPanel.classList.remove("open");
-    });
-
-    // Close only panel (no changes)
-    closeReveal.addEventListener("click", () => {
-        revealPanel.classList.remove("open");
-    });
-
-    // Open all
-    openAllBtn.addEventListener("click", () => {
-        dayButtons.forEach(door => {
-            door.disabled = false;
-            door.classList.remove("locked");
+    // AVAA LUUKUT TÄHÄN PÄIVÄÄN ASTI
+    if (openUntilToday) {
+        openUntilToday.addEventListener("click", () => {
+            dayButtons.forEach(btn => {
+                const d = parseInt(btn.dataset.day);
+                if (d <= today) {
+                    btn.disabled = false;
+                    btn.classList.remove("locked");
+                } else {
+                    btn.disabled = true;
+                    btn.classList.add("locked");
+                }
+            });
         });
-        revealPanel.classList.remove("open");
-    });
+    }
 
-    // Close all
-    closeAllBtn.addEventListener("click", () => {
-        dayButtons.forEach(door => {
-            door.disabled = true;
-            door.classList.add("locked");
-        });
-        revealPanel.classList.remove("open");
-    });
-
-    // Open until real today
-    openUntilTodayBtn.addEventListener("click", () => {
-        const now = new Date();
-        const realToday = (now.getMonth() === 11) ? now.getDate() : 0;
-
-        dayButtons.forEach(door => {
-            const d = parseInt(door.dataset.day);
-            if (d <= realToday) {
-                door.disabled = false;
-                door.classList.remove("locked");
-            }
-        });
-
-        revealPanel.classList.remove("open");
-    });
-
-    // Reset calendar
-    resetBtn.addEventListener("click", () => {
-        dayButtons.forEach(door => {
-            door.disabled = true;
-            door.classList.add("locked");
-        });
-
-        document.querySelectorAll(".reveal-item.selected")
-            .forEach(b => b.classList.remove("selected"));
-
-        revealPanel.classList.remove("open");
-    });
-
-}); // END DOMContentLoaded
-
-// ===========================================
-// QUIZ CODE — KEEP YOUR ORIGINAL BELOW THIS
-// ===========================================
-
+}); 
     
                 const questions = [
       

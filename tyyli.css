@@ -274,12 +274,17 @@ body{
         width: 40px;
         height: 40px;
         margin: 5px;
+        border-radius: 8px;
         background: #b0183f;
         border: 2px solid #e4cdcc;
-        border-radius: 8px;
         color: white;
         cursor: pointer;
-        transition: 0.25s;
+        transition: 0.2s;
+    }
+    
+    .reveal-item:hover {
+        transform: scale(1.08);
+        background: #d72758;
     }
     
     .reveal-item.selected {
