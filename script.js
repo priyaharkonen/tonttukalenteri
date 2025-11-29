@@ -5,7 +5,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 
     const now = new Date();
-    const today = (now.getMonth() === 11) ? now.getDate() : 24;  // December only
+    const today = (now.getMonth() === 11) ? now.getDate() : 0;  // December only
 
     const dayButtons = document.querySelectorAll(".dayBox");
 
