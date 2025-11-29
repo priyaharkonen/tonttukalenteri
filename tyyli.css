@@ -332,6 +332,9 @@ body{
     box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
     transform: scale(1.08);
 }
+.reveal-toggle-btn {
+    z-index: 2000 !important;
+}
 
 /* ============================================================
    ACTION BUTTONS (Avaa kaikki, Sulje kaikki...)
