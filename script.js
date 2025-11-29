@@ -20,24 +20,44 @@
             });
         });
     });  
-        /* -----------------------
-       MULTI-REVEAL FEATURE
-    ------------------------*/
+    // -------------------------------------------
+    // NEW TOP-RIGHT REVEAL FEATURE
+    // -------------------------------------------
 
-    const revealInputs = document.querySelectorAll(".reveal-select");
-    const applyRevealBtn = document.getElementById("applyReveal");
+    const revealToggle = document.getElementById("revealToggle");
+    const revealPanel = document.getElementById("revealPanel");
+    const revealList = document.getElementById("revealList");
+    const applyReveal = document.getElementById("applyReveal");
 
-    if (applyRevealBtn) {
-        applyRevealBtn.addEventListener("click", () => {
-            const selected = [];
+    // Generate 1–24 buttons inside reveal panel
+    if (revealList) {
+        for (let i = 1; i <= 24; i++) {
+            const btn = document.createElement("button");
+            btn.textContent = i;
+            btn.classList.add("reveal-item");
+            btn.dataset.day = i;
 
-            revealInputs.forEach(input => {
-                if (input.classList.contains("selected")) {
-                    selected.push(parseInt(input.dataset.day));
-                }
+            revealList.appendChild(btn);
+
+            btn.addEventListener("click", () => {
+                btn.classList.toggle("selected");
             });
+        }
+    }
 
-            // Unlock selected doors
+    // Open/close reveal panel
+    if (revealToggle && revealPanel) {
+        revealToggle.addEventListener("click", () => {
+            revealPanel.classList.toggle("open");
+        });
+    }
+
+    // Apply reveal selections
+    if (applyReveal) {
+        applyReveal.addEventListener("click", () => {
+            const selected = [...document.querySelectorAll(".reveal-item.selected")]
+                .map(btn => parseInt(btn.dataset.day));
+
             dayButtons.forEach(button => {
                 const d = parseInt(button.getAttribute("data-day"));
                 if (selected.includes(d)) {
@@ -45,15 +65,10 @@
                     button.classList.remove("locked");
                 }
             });
-        });
 
-        // Selecting items
-        revealInputs.forEach(btn => {
-            btn.addEventListener("click", () => {
-                btn.classList.toggle("selected");
-            });
+            revealPanel.classList.remove("open");
         });
-    }      
+    }
     
                 const questions = [
       
