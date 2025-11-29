@@ -20,16 +20,16 @@
             });
         });
     });  
-    // -------------------------------------------
+    //-------------------------------------------------------
     // NEW TOP-RIGHT REVEAL FEATURE
-    // -------------------------------------------
-
+    //-------------------------------------------------------
     const revealToggle = document.getElementById("revealToggle");
-    const revealPanel = document.getElementById("revealPanel");
-    const revealList = document.getElementById("revealList");
-    const applyReveal = document.getElementById("applyReveal");
+    const revealPanel  = document.getElementById("revealPanel");
+    const revealList   = document.getElementById("revealList");
+    const applyReveal  = document.getElementById("applyReveal");
+    const closeReveal  = document.getElementById("closeReveal");
 
-    // Generate 1–24 buttons inside reveal panel
+    // Build 1–24 reveal buttons dynamically
     if (revealList) {
         for (let i = 1; i <= 24; i++) {
             const btn = document.createElement("button");
@@ -45,64 +45,34 @@
         }
     }
 
-    // Open/close reveal panel
+    // Toggle panel open / close
     if (revealToggle && revealPanel) {
         revealToggle.addEventListener("click", () => {
             revealPanel.classList.toggle("open");
         });
     }
 
-    // Apply reveal selections
-    // Apply reveal selections
+    // Apply reveal: unlock selected doors
     if (applyReveal) {
         applyReveal.addEventListener("click", () => {
-
-            // collect selected numbers
             const selected = [...document.querySelectorAll(".reveal-item.selected")]
-                .map(btn => Number(btn.dataset.day));
+                .map(btn => parseInt(btn.dataset.day));
 
-            console.log("Unlocking doors:", selected); // debug
-
-            // unlock selected day buttons
-            const dayButtons = document.querySelectorAll(".dayBox");
-
-            dayButtons.forEach(btn => {
-                const d = Number(btn.dataset.day);
-
+            dayButtons.forEach(button => {
+                const d = parseInt(button.getAttribute("data-day"));
                 if (selected.includes(d)) {
-                    btn.disabled = false;
-                    btn.classList.remove("locked");
-                    btn.style.opacity = "1";
-                    btn.style.pointerEvents = "auto";
+                    button.disabled = false;
+                    button.classList.remove("locked");
                 }
             });
 
-            // close panel
             revealPanel.classList.remove("open");
         });
     }
-    // Close (re-lock) selected doors
-    const closeReveal = document.getElementById("closeReveal");
 
+    // Close panel without applying
     if (closeReveal) {
         closeReveal.addEventListener("click", () => {
-
-            const selected = [...document.querySelectorAll(".reveal-item.selected")]
-                .map(btn => Number(btn.dataset.day));
-
-            const dayButtons = document.querySelectorAll(".dayBox");
-
-            dayButtons.forEach(btn => {
-                const d = Number(btn.dataset.day);
-
-                if (selected.includes(d)) {
-                    btn.disabled = true;
-                    btn.classList.add("locked");
-                    btn.style.opacity = "0.5";
-                    btn.style.pointerEvents = "none";
-                }
-            });
-
             revealPanel.classList.remove("open");
         });
     }
