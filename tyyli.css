@@ -227,139 +227,147 @@ body{
         0% { opacity: 0.2; }
         100% { opacity: 1; }
     }
-    @media (max-width: 768px) {
-        .calendar {
-            grid-template-columns: repeat(3, 1fr); /* big buttons fit better */
-            gap: 14px;
-        }
-    
-        .dayBox {
-            height: 80px;
-            font-size: 20px;
-        }
-    
-        .reveal-panel {
-            top: auto;
-            bottom: 20px;
-            right: 20px;
-            width: 90%;
-            max-width: 300px;
-        }
-    
-        .reveal-toggle-btn {
-            bottom: 20px;
-            top: auto;
-            right: 20px;
-            width: 60px;
-            height: 60px;
-            font-size: 26px;
-        }
+/* ============================================================
+   REVEAL TOGGLE BUTTON (TOP-RIGHT)
+   ============================================================ */
+   .reveal-toggle-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #b0183f;
+    border: 3px solid #e4cdcc;
+    width: 52px;
+    height: 52px;
+    color: white;
+    font-size: 28px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    transition: 0.25s ease;
+}
+
+.reveal-toggle-btn:hover {
+    transform: rotate(90deg) scale(1.1);
+}
+.reveal-toggle-btn .icon {
+    font-size: 24px;
+    line-height: 1;
+}
+
+/* ============================================================
+   REVEAL PANEL CONTAINER
+   ============================================================ */
+.reveal-panel {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    width: 260px;
+    padding: 18px;
+    background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(8px);
+    border-radius: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-15px);
+    transition: 0.25s ease;
+    z-index: 999;
+}
+
+.reveal-panel.open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+/* ============================================================
+   SMALL 1–24 BUTTON GRID
+   ============================================================ */
+.reveal-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.reveal-list-item {
+    width: 48px;
+    height: 48px;
+    background: #b0183f;
+    color: white;
+    border-radius: 8px;
+    border: 2px solid #e4cdcc;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.reveal-list-item.selected {
+    background: #d72758;
+    border-color: #fff;
+    transform: scale(1.05);
+}
+
+/* ============================================================
+   ACTION BUTTONS (Avaa kaikki, Sulje kaikki...)
+   ============================================================ */
+.reveal-list-btn,
+.apply-reveal-btn,
+.close-reveal-btn,
+.open-all-btn,
+.close-all-btn,
+#openUntilToday,
+.reset-calendar-btn {
+    width: 100%;
+    padding: 8px;
+    background: #b0183f;
+    border: 2px solid #e4cdcc;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.25s;
+    font-size: 14px;
+}
+
+.reveal-list-btn:hover,
+.apply-reveal-btn:hover,
+.close-reveal-btn:hover,
+.open-all-btn:hover,
+#closeAll:hover,
+#openUntilToday:hover,
+.reset-calendar-btn:hover {
+    background: #d72758;
+}
+
+/* ============================================================
+   MOBILE RESPONSIVE
+   ============================================================ */
+@media (max-width: 768px) {
+    #revealPanel {
+        right: 10px;
+        width: 92%;
+        max-width: 320px;
     }
-    
-    @media (max-width: 480px) {
-        .calendar {
-            grid-template-columns: repeat(2, 1fr);
-        }
-    
-        .dayBox {
-            height: 70px;
-            font-size: 18px;
-        }
-    }
-    /* Top-right reveal toggle */
-    .reveal-toggle {
-        position: fixed;
-        top: 20px;
+
+    #revealToggle {
+        top: auto;
+        bottom: 20px;
         right: 20px;
-        background: #b0183f;
-        border: 2px solid #e4cdcc;
-        color: white;
-        padding: 15px;
-        border-radius: 50%;
-        cursor: pointer;
-        z-index: 1000;
-        transition: 0.2s;
     }
-    
-    .reveal-toggle:hover {
-        transform: rotate(90deg) scale(1.1);
+}
+
+@media (max-width: 480px) {
+    #revealList {
+        grid-template-columns: repeat(3, 1fr);
     }
-    
-    /* Reveal panel */
-    .reveal-panel {
-        position: fixed;
-        top: 90px;
-        right: 20px;
-        width: 260px;
-        background: rgba(0,0,0,0.35);
-        backdrop-filter: blur(8px);
-        border-radius: 18px;
-        padding: 18px;
-        color: white;
-        opacity: 0;
-        pointer-events: none;
-        transform: translateY(-10px);
-        transition: 0.3s ease;
-        border: 2px solid rgba(255,255,255,0.2);
-    }
-    
-    .reveal-panel.open {
-        opacity: 1;
-        pointer-events: all;
-        transform: translateY(0);
-    }
-    
-    /* Reveal items */
+
     .reveal-item {
-        width: 38px;
-        height: 38px;
-        background: #b0183f;
-        border: 2px solid #ffd5e6;
-        border-radius: 10px;
-        margin: 4px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        transition: 0.2s;
-        font-weight: bold;
+        width: 42px;
+        height: 42px;
+        font-size: 16px;
     }
-    
-    .reveal-item.selected {
-        background: #d72585;
-        border-color: white;
-        transform: scale(1.1);
-    }
-    
-    .reveal-item:hover {
-        transform: scale(1.08);
-        background: #d72758;
-    }
- 
-    /* Apply & close buttons */
-    .apply-reveal-btn,
-    .close-reveal-btn,
-    #openAll,
-    #closeAll,
-    #openUntilToday,
-    #resetCalendar {
-        margin-top: 10px;
-        width: 100%;
-        padding: 8px;
-        background: #b0183f;
-        border: 2px solid #e4cdcc;
-        border-radius: 8px;
-        color: white;
-        cursor: pointer;
-        font-size: 14px;
-        transition: 0.25s;
-    }
-    
-    .apply-reveal-btn:hover,
-    .close-reveal-btn:hover,
-    #openAll:hover,
-    #closeAll:hover,
-    #openUntilToday:hover,
-    #resetCalendar:hover {
-        background: #d27585;
-    }
+}
