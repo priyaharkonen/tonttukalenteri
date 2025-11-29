@@ -39,6 +39,22 @@
     <script>
         showQuestionForDay(1); 
     </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const answerButtons = document.querySelectorAll(".answer-btn");
+        
+            answerButtons.forEach(btn => {
+                btn.addEventListener("click", handleAnswer);
+                btn.addEventListener("touchstart", handleAnswer, { passive: true });
+            });
+        
+            function handleAnswer(e) {
+                const selected = e.target;
+                selected.classList.add("selected");
+                // Your existing answer-handling logic goes here
+            }
+        });
+        </script>
 </body>
 </html>
 </html>
