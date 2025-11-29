@@ -266,28 +266,29 @@ body{
 .reveal-panel {
     position: fixed;
     top: 100px;
-    right: 30px;
+    right: 20px;
     width: 260px;
     padding: 18px;
-    
-    background: rgba(5, 40, 20, 0.75);    /* deep green glass */
-    backdrop-filter: blur(8px);
-    
     border-radius: 16px;
-    border: 2px solid rgba(200, 50, 70, 0.5); /* soft red border */
-    color: #fff;
+
+    /* Transparent glass style */
+    background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(8px);
+
+    border: 2px solid rgba(255, 255, 255, 0.25);
+    color: white;
+
     opacity: 0;
+    transform: translateY(-15px);
     pointer-events: none;
-    transform: translateX(40px);
-    transition: opacity .35s ease, transform .35s ease;
+    transition: 0.25s ease;
     z-index: 999;
 }
-
 /* When panel is open */
 .reveal-panel.open {
     opacity: 1;
     pointer-events: auto;
-    transform: translateX(0);
+    transform: translateY(0);
 }
 
 /* BUTTON GRID */
@@ -302,35 +303,26 @@ body{
 .reveal-list-item {
     width: 48px;
     height: 48px;
-    font-size: 18px;
-
-    background: rgba(255,255,255,0.07);    /* soft white-transparent */
-    color: #ffffff;
-
-    border: 2px solid rgba(255, 255, 255, 0.35);
-    border-radius: 10px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
+    background: #b0183f;          /* Christmas red */
+    color: white;
+    border: 2px solid #e4cdcc;     /* soft border */
+    border-radius: 8px;
+    font-size: 20px;
     cursor: pointer;
-    transition: 0.25s;
+    transition: 0.2s;
 }
 
 /* Hover effect */
 .reveal-list-item:hover {
-    background: rgba(255,255,255,0.15);
-    transform: scale(1.05);
+    background: #d52758;          /* brighter red on hover */
+    border-color: #fff;
 }
 
 /* SELECTED STATE — GOLD GLOW */
 .reveal-list-item.selected {
-    background: #d4af37;                /* gold */
-    color: #2b1a00;                     /* dark brown text */
-    border-color: #f7e9a8;
-    box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
-    transform: scale(1.08);
+    background: #7d0f2f;          /* darker wine red */
+    border-color: #ffffff;
+    transform: scale(1.06);
 }
 .reveal-toggle-btn {
     z-index: 2000 !important;
