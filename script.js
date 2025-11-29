@@ -1,21 +1,24 @@
+// ============================================================
+//  MODE + DOOR LOCKING
+// ============================================================
+
 document.addEventListener("DOMContentLoaded", () => {
 
-    // ================================
-    // MODE + DOOR LOCKING
-    // ================================
     const now = new Date();
-    const today = (now.getMonth() === 11) ? now.getDate() : 0;
+    const today = (now.getMonth() === 11) ? now.getDate() : 24;  // December only
 
     const dayButtons = document.querySelectorAll(".dayBox");
 
     dayButtons.forEach(button => {
         const d = parseInt(button.dataset.day);
 
+        // Lock future days
         if (d > today) {
             button.disabled = true;
             button.classList.add("locked");
         }
 
+        // Normal click opens day page
         button.addEventListener("click", () => {
             if (!button.disabled) {
                 window.location.href = `days/day${d}.html`;
@@ -23,21 +26,19 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-
-    // ================================
-    // SIMPLE REVEAL SYSTEM
-    // ================================
+    // ============================================================
+    // SIMPLE REVEAL SYSTEM (NEW FUNCTIONALITY)
+    // ============================================================
 
     const revealToggle = document.getElementById("revealToggle");
-    const revealPanel = document.getElementById("revealPanel");
-    const revealList = document.getElementById("revealList");
+    const revealPanel  = document.getElementById("revealPanel");
+    const revealList   = document.getElementById("revealList");
 
-    const openAll = document.getElementById("openAll");
-    const closeAll = document.getElementById("closeAll");
+    const openAll      = document.getElementById("openAll");
+    const closeAll     = document.getElementById("closeAll");
     const openUntilToday = document.getElementById("openUntilToday");
 
-
-    // Build 1–24 reveal toggle buttons
+    // ----- Build 1–24 small buttons -----
     if (revealList) {
         for (let i = 1; i <= 24; i++) {
             const btn = document.createElement("button");
@@ -47,17 +48,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
             revealList.appendChild(btn);
 
+            // Toggle the big door open/closed
             btn.addEventListener("click", () => {
-                const target = document.querySelector(`.dayBox[data-day="${i}"]`);
-                if (!target) return;
-                target.classList.toggle("locked");
-                target.disabled = target.classList.contains("locked");
+                const bigDoor = document.querySelector(`.dayBox[data-day="${i}"]`);
+
+                if (bigDoor) {
+                    bigDoor.disabled = !bigDoor.disabled;  // toggle disabled
+
+                    if (bigDoor.disabled) {
+                        bigDoor.classList.add("locked");
+                    } else {
+                        bigDoor.classList.remove("locked");
+                    }
+                }
+
+                btn.classList.toggle("selected");
             });
         }
     }
 
+    // ----- Open panel -----
+    if (revealToggle) {
+        revealToggle.addEventListener("click", () => {
+            revealPanel.classList.toggle("open");
+        });
+    }
 
-    // AVAA KAIKKI
+    // ----- AVAA KAIKKI -----
     if (openAll) {
         openAll.addEventListener("click", () => {
             dayButtons.forEach(btn => {
@@ -67,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // SULJE KAIKKI
+    // ----- SULJE KAIKKI -----
     if (closeAll) {
         closeAll.addEventListener("click", () => {
             dayButtons.forEach(btn => {
@@ -77,23 +94,18 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // AVAA LUUKUT TÄHÄN PÄIVÄÄN ASTI
+    // ----- Reset to real calendar (avaa luukut tähän päivään asti) -----
     if (openUntilToday) {
         openUntilToday.addEventListener("click", () => {
             dayButtons.forEach(btn => {
                 const d = parseInt(btn.dataset.day);
-                if (d <= today) {
-                    btn.disabled = false;
-                    btn.classList.remove("locked");
-                } else {
-                    btn.disabled = true;
-                    btn.classList.add("locked");
-                }
+                btn.disabled = d > today;
+                btn.classList.toggle("locked", d > today);
             });
         });
     }
 
-}); 
+});  // END DOMContentLoaded
     
                 const questions = [
       
