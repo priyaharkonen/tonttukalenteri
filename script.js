@@ -1,81 +1,140 @@
-    // --- MODE SWITCH ---
-    // Switch to actual mode by removing "//" from line 6 and add "//" to line 8 
-    document.addEventListener("DOMContentLoaded", () => {
-        const now = new Date();
-        // --- ACTUAL MODE  ---
-        const today = (now.getMonth() === 11) ? now.getDate() : 0;
-        // --- DEMO MODE ---
-        //const today = 24;  
-        const dayButtons = document.querySelectorAll('.dayBox');
-        dayButtons.forEach(button => {
-            const buttonDay = parseInt(button.getAttribute("data-day"));
-            
-            if (buttonDay > today) {
-                button.disabled = true;
-                return; //no click event
+ // ===========================================
+// MODE + DOOR LOCKING
+// ===========================================
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const now = new Date();
+    const today = (now.getMonth() === 11) ? now.getDate() : 0;
+    //Demo mode
+    //const today = 24; 
+
+    const dayButtons = document.querySelectorAll(".dayBox");
+
+    dayButtons.forEach(button => {
+        const d = parseInt(button.dataset.day);
+
+        if (d > today) {
+            button.disabled = true;
+            button.classList.add("locked");
+        }
+
+        button.addEventListener("click", () => {
+            if (!button.disabled) {
+                window.location.href = `days/day${d}.html`;
             }
-            //Enable clicking on unlocked days
-            button.addEventListener("click", () => {
-                window.location.href = `days/day${buttonDay}.html`;  
-            });
         });
-    });  
-    //-------------------------------------------------------
-    // NEW TOP-RIGHT REVEAL FEATURE
-    //-------------------------------------------------------
+    });
+
+    // ===========================================
+    // REVEAL PANEL SETUP
+    // ===========================================
+
     const revealToggle = document.getElementById("revealToggle");
     const revealPanel  = document.getElementById("revealPanel");
     const revealList   = document.getElementById("revealList");
+
     const applyReveal  = document.getElementById("applyReveal");
     const closeReveal  = document.getElementById("closeReveal");
 
-    // Build 1–24 reveal buttons dynamically
-    if (revealList) {
-        for (let i = 1; i <= 24; i++) {
-            const btn = document.createElement("button");
-            btn.textContent = i;
-            btn.classList.add("reveal-item");
-            btn.dataset.day = i;
+    const openAllBtn        = document.getElementById("openAll");
+    const closeAllBtn       = document.getElementById("closeAll");
+    const openUntilTodayBtn = document.getElementById("openUntilToday");
+    const resetBtn          = document.getElementById("resetCalendar");
 
-            revealList.appendChild(btn);
+    // Build reveal buttons
+    for (let i = 1; i <= 24; i++) {
+        const b = document.createElement("button");
+        b.textContent = i;
+        b.classList.add("reveal-item");
+        b.dataset.day = i;
 
-            btn.addEventListener("click", () => {
-                btn.classList.toggle("selected");
-            });
-        }
-    }
+        revealList.appendChild(b);
 
-    // Toggle panel open / close
-    if (revealToggle && revealPanel) {
-        revealToggle.addEventListener("click", () => {
-            revealPanel.classList.toggle("open");
+        b.addEventListener("click", () => {
+            b.classList.toggle("selected");
         });
     }
 
-    // Apply reveal: unlock selected doors
-    if (applyReveal) {
-        applyReveal.addEventListener("click", () => {
-            const selected = [...document.querySelectorAll(".reveal-item.selected")]
-                .map(btn => parseInt(btn.dataset.day));
+    // Toggle panel
+    revealToggle.addEventListener("click", () => {
+        revealPanel.classList.toggle("open");
+    });
 
-            dayButtons.forEach(button => {
-                const d = parseInt(button.getAttribute("data-day"));
-                if (selected.includes(d)) {
-                    button.disabled = false;
-                    button.classList.remove("locked");
-                }
-            });
+    // Apply reveal
+    applyReveal.addEventListener("click", () => {
+        const selected = [...document.querySelectorAll(".reveal-item.selected")]
+            .map(btn => parseInt(btn.dataset.day));
 
-            revealPanel.classList.remove("open");
+        dayButtons.forEach(door => {
+            const d = parseInt(door.dataset.day);
+            if (selected.includes(d)) {
+                door.disabled = false;
+                door.classList.remove("locked");
+            }
         });
-    }
 
-    // Close panel without applying
-    if (closeReveal) {
-        closeReveal.addEventListener("click", () => {
-            revealPanel.classList.remove("open");
+        revealPanel.classList.remove("open");
+    });
+
+    // Close only panel (no changes)
+    closeReveal.addEventListener("click", () => {
+        revealPanel.classList.remove("open");
+    });
+
+    // Open all
+    openAllBtn.addEventListener("click", () => {
+        dayButtons.forEach(door => {
+            door.disabled = false;
+            door.classList.remove("locked");
         });
-    }
+        revealPanel.classList.remove("open");
+    });
+
+    // Close all
+    closeAllBtn.addEventListener("click", () => {
+        dayButtons.forEach(door => {
+            door.disabled = true;
+            door.classList.add("locked");
+        });
+        revealPanel.classList.remove("open");
+    });
+
+    // Open until real today
+    openUntilTodayBtn.addEventListener("click", () => {
+        const now = new Date();
+        const realToday = (now.getMonth() === 11) ? now.getDate() : 0;
+
+        dayButtons.forEach(door => {
+            const d = parseInt(door.dataset.day);
+            if (d <= realToday) {
+                door.disabled = false;
+                door.classList.remove("locked");
+            }
+        });
+
+        revealPanel.classList.remove("open");
+    });
+
+    // Reset calendar
+    resetBtn.addEventListener("click", () => {
+        dayButtons.forEach(door => {
+            door.disabled = true;
+            door.classList.add("locked");
+        });
+
+        document.querySelectorAll(".reveal-item.selected")
+            .forEach(b => b.classList.remove("selected"));
+
+        revealPanel.classList.remove("open");
+    });
+
+}); // END DOMContentLoaded
+
+// ===========================================
+// QUIZ CODE — KEEP YOUR ORIGINAL BELOW THIS
+// ===========================================
+
     
                 const questions = [
       
