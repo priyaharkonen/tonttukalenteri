@@ -296,9 +296,8 @@ body{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 8px;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
 }
-
 /* REVEAL ITEM BUTTONS */
 .reveal-list-item {
     width: 48px;
@@ -324,10 +323,10 @@ body{
     border-color: #ffffff;
     transform: scale(1.06);
 }
-.reveal-toggle-btn {
-    z-index: 2000 !important;
+.reveal-toggle-btn:hover {
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 6px gold);
 }
-
 /* ============================================================
    ACTION BUTTONS (Avaa kaikki, Sulje kaikki...)
    ============================================================ */
