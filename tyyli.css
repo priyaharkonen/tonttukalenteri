@@ -227,3 +227,53 @@ body{
         0% { opacity: 0.2; }
         100% { opacity: 1; }
     }
+    /* ------------------------ */
+/* MULTI REVEAL (Manual unlock) */
+/* ------------------------ */
+
+.multi-reveal {
+    text-align: center;
+    margin: 20px auto;
+    background: #0f3b24;
+    border: 3px solid #b81e3f;
+    padding: 15px 20px;
+    border-radius: 12px;
+    width: 80%;
+    max-width: 600px;
+    color: #fff;
+  }
+  
+  .reveal-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin: 10px 0;
+  }
+  
+  .reveal-select {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background-color: #b81e3f;
+    border: 2px solid #e4dcdc;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  
+  .reveal-select.selected {
+    background-color: #d27585;
+    border-color: white;
+  }
+  
+  #applyReveal {
+    margin-top: 10px;
+    padding: 8px 16px;
+    font-size: 16px;
+    background-color: #b81e3f;
+    border: 2px solid #e4dcdc;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+  }
